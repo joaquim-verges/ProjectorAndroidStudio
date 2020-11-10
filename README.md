@@ -67,7 +67,7 @@ $ curl --output android-studio.tar.gz https://redirector.gvt1.com/edgedl/android
 * Unzip the downloaded archive:
 
 ```
-$ tar -xvf android-studio.tar.gz`
+$ tar -xvf android-studio.tar.gz
 ```
 5. You now have Android Studio installed, all that is left is to configure Projector:
 ```
@@ -89,15 +89,39 @@ $ projector run AndroidStudio
 2. Click OK on the dialog that shows up
 3. Enjoy your remote Android Studio!
 
-### Optional: Setup ADB to deploy to a local device
+### Optional: Setup ADB to deploy to / debug a local device
 
+1. You need to have the same version of adb on the remote and local machine
 ```
-// TODO
+$ adb -- version
+Android Debug Bridge version 1.0.41
+Version 30.0.4-6686687
 ```
+2. Kill adb on both local and remote machines if it was already running
+```
+$ adb kill-server
+```
+3. On the local machine, with an Android device connected, run:
+```
+$ adb devices
+List of devices attached
+  ABCDEF12345
+$ ssh -R 5037:localhost:5307 <your_server_ip>
+```
+4. Now check that the device is visible on the remote machine:
+```
+$ adb devices
+List of devices attached
+  ABCDEF12345
+```
+5. That's it! Both machines can now run adb commands and everything will be redirected to the local phone.
+
 
 #### Useful links
 
 [Main Projector README](https://github.com/JetBrains/projector-server/blob/master/README-JETBRAINS.md)
+
 [Projector Installer Repo](https://github.com/JetBrains/projector-installer)
+
 [Projecter Server Repo](https://github.com/JetBrains/projector-server/blob/master/docs/Projector.md)
 
