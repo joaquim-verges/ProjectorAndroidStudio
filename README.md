@@ -1,6 +1,6 @@
-# ProjectorAndroidStudio
+# JetBrains Projector with Android Studio
 
-Guide to setup JetBrains Projector and access Android Studio from any device
+Guide to setup JetBrains Projector and access Android Studio from any device.
 
 ### Step 1: Spin up a linux server
 
@@ -12,7 +12,7 @@ This guide will explain how to get a virtual machine setup with Amazon AWS, but 
 4. Pick the instance type, I suggest one with at least 8Gb RAM, preferrably more
 5. Choose how much storage you need, I suggest at least 20Gb (you can always expand this later)
 6. When it comes to the security rules, you need to add a new one to be able to access the port that Projector will use
-* Add a new custom TCP rules with port 8888 (or any port you like)
+* Add a new custom TCP rule with port 8888 (or any port you like, will be useful in the next steps)
 * If you want to secure access, you can choose to only open this rule to your IP adress
 7. Choose a private key to access the instance and start it
 8. Write down the IP addresss (ipv4) shown in the EC2 console
@@ -69,7 +69,7 @@ $ curl --output android-studio.tar.gz https://redirector.gvt1.com/edgedl/android
 ```
 $ tar -xvf android-studio.tar.gz
 ```
-5. You now have Android Studio installed, all that is left is to configure Projector:
+5. You now have Android Studio installed, all that is left is to configure Projector, making sure to select the port that was chosen as the custom TCP rule for the VM (step 1.6) - here we're using port 8888
 ```
 $ projector config add
 Enter a new configuration name: AndroidStudio
@@ -117,9 +117,11 @@ List of devices attached
 5. That's it! Both machines can now run adb commands and everything will be redirected to the local phone.
 
 
-#### Useful links
+### Useful links and other installation methods
 
 [Main Projector README](https://github.com/JetBrains/projector-server/blob/master/README-JETBRAINS.md)
+
+[Projector Docker Image](https://github.com/JetBrains/projector-docker)
 
 [Projector Installer Repo](https://github.com/JetBrains/projector-installer)
 
