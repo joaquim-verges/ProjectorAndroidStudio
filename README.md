@@ -11,9 +11,9 @@ This guide will explain how to get a virtual machine setup with Amazon AWS, but 
 3. Search for "Debian" and choose the latest community Debian distribution (Debian 10 "Buster" at the time of writing)
 4. Pick the instance type, I suggest one with at least 8Gb RAM, preferrably more
 5. Choose how much storage you need, I suggest at least 20Gb (you can always expand this later)
-6. When it comes to the security rules, you need to add a new one to be able to access the port that Projector will use
-* Add a new custom TCP rule with port 8888 (or any port you like, will be useful in the next steps)
-* If you want to secure access, you can choose to only open this rule to your IP adress
+6. When it comes to the security section, you need to add a new inbound rule to be able to access the port that Projector will use
+* Add a new custom TCP inbound rule with port 8888 (or any port you like, will be useful in the next step)
+* If you want to secure access, you can choose to only allow connections only from your own IP adress (recommended)
 7. Choose a private key to access the instance and start it
 8. Write down the IP addresss (ipv4) shown in the EC2 console
 
