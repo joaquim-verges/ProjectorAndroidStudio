@@ -2,6 +2,8 @@
 
 Guide to setup JetBrains Projector and access Android Studio from any device.
 
+[Blog post](https://joenrv.medium.com/how-to-run-android-studio-on-any-device-with-jetbrains-projector-3d9d23a8c179)
+
 ![Android Studio on iPad Pro](ipad.jpg)
 *Android Studio on an iPad Pro*
 
