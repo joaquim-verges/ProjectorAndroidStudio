@@ -109,15 +109,19 @@ $ adb kill-server
 $ adb devices
 List of devices attached
   ABCDEF12345
-$ ssh -R 5037:localhost:5307 <your_server_ip>
+$ ssh -R 5037:localhost:5037 remote-builder
 ```
-4. Now check that the device is visible on the remote machine:
+4. This will connect to your instance with port forwarding enabled. Now check that the device is visible on the remote machine:
 ```
 $ adb devices
 List of devices attached
   ABCDEF12345
 ```
 5. That's it! Both machines can now run adb commands and everything will be redirected to the local phone.
+6. To always connect to your instance with adb port forwarding (port 5037 by default), you can add the following line to your `~/.ssh/confg`:
+```
+RemoteForward 5037 localhost:5037
+```
 
 
 ### Useful links and other installation methods
