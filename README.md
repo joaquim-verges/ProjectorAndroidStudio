@@ -2,19 +2,22 @@
 
 Guide to setup JetBrains Projector and access Android Studio from any device.
 
-### Step 1: Spin up a linux server
+![Android Studio on iPad Pro](ipad.jpg)
+*Android Studio on an iPad Pro*
+
+### Step 1: Spin up a Linux server
 
 This guide will explain how to get a virtual machine setup with Amazon AWS, but you can choose any other provider like Google Cloud or Microsoft Azure, or even a machine on your local network.
 
 1. Make a [AWS account](https://aws.amazon.com/free/) and login
 2. Go to the EC2 section and select create a new Instance
-3. Search for "Debian" and choose the latest community Debian distribution (Debian 10 "Buster" at the time of writing)
+3. Search for "Debian" in the AWS Marketplace and choose the latest Debian distribution (Debian 10 Buster at the time of writing)
 4. Pick the instance type, I suggest one with at least 8Gb RAM, preferrably more
-5. Choose how much storage you need, I suggest at least 20Gb (you can always expand this later)
-6. When it comes to the security section, you need to add a new inbound rule to be able to access the port that Projector will use
-* Add a new custom TCP inbound rule with port 8888 (or any port you like, will be useful in the next step)
-* If you want to secure access, you can choose to only allow connections only from your own IP adress (recommended)
-7. Choose a private key to access the instance and start it
+5. Click next until you get to storage, and choose how much storage you need. I suggest at least 20Gb (you can always expand this later)
+6. Click next until the security section, you need to add a new rule to be able to access the port that Projector will use
+* Add a new custom TCP rule with port 8888 (or any port you like, will be useful in the next step)
+* If you want to secure access, you can choose to only allow connections only from your own IP adress (recommended): Source > My Ip
+7. Choose or create a private key to access the instance and start it
 8. Write down the IP addresss (ipv4) shown in the EC2 console
 
 ### Step 2: Connect to your remote server via SSH
@@ -32,10 +35,10 @@ Host {REMOTE_MACHINE_ALIAS}
   ControlPath /tmp/%r@%h:%p
   ControlPersist 1h
 ```
-* Choose an alias like `remote-builder` or anything you like
-* By default, the username for a Debian server is `admin`
-* `Hostname` is the IP address of your EC2 instance
-* `IdentityFile` is the path to your private key file created and downloaded when crating the EC2 instance
+* `Host` - Choose an alias like `remote-builder` or anything you like
+* `User` - By default, the username for a Debian server is `admin`
+* `Hostname` - the IP address of your EC2 instance
+* `IdentityFile` - the path to your private key file downloaded when creating the EC2 instance
 
 3. Now you can connect to your machine easily like this
 
