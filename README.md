@@ -49,7 +49,7 @@ $ ssh remote-builder
 ```
 4. Once connected, you can now begin installing things on your remote server
 
-### Step 2: Install Projector and Android Studio on the remote server
+### Step 3: Install Projector and Android Studio on the remote server
 
 1. To install Projector (and dependencies), run the following commands:
 ```
@@ -88,7 +88,7 @@ Enter a desired Projector port (press ENTER for default) [10005]: 8888
 $ projector run AndroidStudio
 ```
 
-### Step 3: Access Android Studio from a Browser
+### Step 4: Access Android Studio from a Browser
 
 1. On your local machine, start a browser and go to `http://<your_server_ip>:8888`
 2. Click OK on the dialog that shows up
