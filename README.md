@@ -49,6 +49,8 @@ $ ssh remote-builder
 ```
 4. Once connected, you can now begin installing things on your remote server
 
+Note: when you're done, remember to stop your AWS instance to stop being charged! 
+
 ### Step 3: Install Projector and Android Studio on the remote server
 
 1. To install Projector (and dependencies), run the following commands:
@@ -67,7 +69,7 @@ projector --help
 * Download it to your remote server in your home directory with curl: 
 
 ```
-$ curl --output android-studio.tar.gz https://redirector.gvt1.com/edgedl/android/studio/ide-zips/4.2.0.16/android-studio-ide-202.6939830-linux.tar.gz
+$ curl -L --output android-studio.tar.gz https://redirector.gvt1.com/edgedl/android/studio/ide-zips/4.2.0.16/android-studio-ide-202.6939830-linux.tar.gz
 ```
 * Unzip the downloaded archive:
 
