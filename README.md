@@ -55,6 +55,7 @@ Note: when you're done, remember to stop your AWS instance to stop being charged
 
 1. To install Projector (and dependencies), run the following commands:
 ```
+$ sudo apt-get update
 $ sudo apt install python3 python3-pip
 $ sudo apt install libxext6 libxrender1 libxtst6 libfreetype6 libxi6
 $ pip3 install projector-installer
