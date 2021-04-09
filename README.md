@@ -130,23 +130,53 @@ RemoteForward 5037 localhost:5037
 ```
 ### Script to facilitate the entire workflow
 
-This is the home made script I use. It takes care of starting my EC2 instance, starting Projector in a tab-less Chrome and stopping the EC2 instance when I exit Chrome. Put this in a bash script, like `work.bash` and run it. The script uses the aws CLI, which you will have to setup beforehand ([documentation](https://aws.amazon.com/cli/)). Make sure to replace the placeholder instance ids with your own.
+This is the home made script I use. It takes care of starting my EC2 instance which I gave a static IP adress to, starting Projector in a tab-less Chrome and stopping the EC2 instance when I exit Chrome. Put this in a bash script, like `work.bash` and run it. The script uses the aws CLI, which you will have to setup beforehand ([documentation](https://aws.amazon.com/cli/)). Make sure to replace the placeholder instance ids with your own.
 
 ```
 #!/bin/bash
+INSTANCE_ID=<your_instance_id>
+STATIC_IP=<your_instance_static_ip>
+PORT=8888
 
 echo "Starting Server..."
-aws ec2 start-instances --instance-ids <your_instance_id>
-aws ec2 wait instance-running --instance-ids <your_instance_id>
+aws ec2 start-instances --instance-ids $INSTANCE_ID
+aws ec2 wait instance-running --instance-ids $INSTANCE_ID
 echo "Server Started"
 adb devices
 ssh -o 'ConnectionAttempts 10' remote-builder "/home/admin/.local/bin/projector run AndroidStudio" &
 sleep 5
 echo "Projector started, opening browser..."
-open -W -a "Google Chrome" --args --app="https://54.177.101.229:8888/?host=54.177.101.229&port=8888"
+open -W -a "Google Chrome" --args --app="https://$STATIC_IP:8888/?host=$STATIC_IP&port=$PORT"
 echo "Stopping Server..."
-aws ec2 stop-instances --instance-ids <your_instance_id>
-aws ec2 wait instance-stopped --instance-ids <your_instance_id>
+aws ec2 stop-instances --instance-ids $INSTANCE_ID
+aws ec2 wait instance-stopped --instance-ids $INSTANCE_ID
+echo "Done"
+```
+
+If you don't want to give a static IP address to your EC2 instance, you can get the generated IP automatically with the aws CLI, which removes the need for having a `.ssh/config` file altogether. This is what the modified script looks like (Thanks @Clement-Jean for the tip!):
+
+```
+#!/bin/bash
+
+INSTANCE_ID=<your_instance_id>
+PORT=8888
+USER=admin
+REGION=<your_instance_region>
+
+echo "Starting Server..."
+aws ec2 start-instances --instance-ids $INSTANCE_ID
+aws ec2 wait instance-running --instance-ids $INSTANCE_ID
+echo "Server Started"
+IP=`aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[*].Instances[*].PublicIpAddress' --output text`
+EC2_IP=`echo $IP | sed 's/\./-/g'`
+
+adb devices
+ssh -o 'ConnectionAttempts 10' -i <your_pem_file_path> $USER@ec2-$EC2_IP.$REGION.compute.amazonaws.com "/home/$USER/.local/bin/projector run AndroidStudio" &
+sleep 5
+echo "Projector started, opening browser..."
+open -W -a "Google Chrome" --args --app="https://$IP:8888/?host=$IP&port=$PORT"
+aws ec2 stop-instances --instance-ids $INSTANCE_ID
+aws ec2 wait instance-stopped --instance-ids $INSTANCE_ID
 echo "Done"
 ```
 
