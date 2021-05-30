@@ -66,11 +66,11 @@ projector --help
 ```
 3. At this point, you could run one of the pre-configured IDEs like IntelliJ and start using it, but to run Android Studio, you need to install it separately.
 4. Download the latest Android Studio 4.2 or above (4.2 is the minimum version that works with Projector)
-* Find the latest download URL for linux from https://developer.android.com/studio/archive. At the time of writing, the latest version is Artic Fox Canary 6
+* Find the latest download URL for linux from https://developer.android.com/studio/archive. At the time of writing, the latest version is Artic Fox Beta 3
 * Download it to your remote server in your home directory with curl: 
 
 ```
-$ curl -L --output android-studio.tar.gz https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2020.3.1.6/android-studio-2020.3.1.6-linux.tar.gz
+$ curl -L --output android-studio.tar.gz https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2020.3.1.18/android-studio-2020.3.1.18-linux.tar.gz
 ```
 * Unzip the downloaded archive:
 
