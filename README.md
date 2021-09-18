@@ -65,12 +65,12 @@ $ pip3 install projector-installer
 projector --help
 ```
 3. At this point, you could run one of the pre-configured IDEs like IntelliJ and start using it, but to run Android Studio, you need to install it separately.
-4. Download the latest Android Studio 4.2 or above (4.2 is the minimum version that works with Projector)
-* Find the latest download URL for linux from https://developer.android.com/studio/archive. At the time of writing, the latest version is Artic Fox Beta 3
+4. Download the latest Android Studio Arctic Fox or above (Arctic Fox is the minimum version that works with Projector)
+* Find the latest download URL for linux from https://developer.android.com/studio/archive. At the time of writing, the latest version is Artic Fox Patch 2
 * Download it to your remote server in your home directory with curl: 
 
 ```
-$ curl -L --output android-studio.tar.gz https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2020.3.1.18/android-studio-2020.3.1.18-linux.tar.gz
+$ curl -L --output android-studio.tar.gz https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2020.3.1.24/android-studio-2020.3.1.24-linux.tar.gz
 ```
 * Unzip the downloaded archive:
 
@@ -146,7 +146,7 @@ adb devices
 ssh -o 'ConnectionAttempts 10' remote-builder "/home/admin/.local/bin/projector run AndroidStudio" &
 sleep 5
 echo "Projector started, opening browser..."
-open -W -a "Google Chrome" --args --app="https://$STATIC_IP:8888/?host=$STATIC_IP&port=$PORT"
+open -W -na "Google Chrome" --args --new-window --app="https://$STATIC_IP:8888/?host=$STATIC_IP&port=$PORT"
 echo "Stopping Server..."
 aws ec2 stop-instances --instance-ids $INSTANCE_ID
 aws ec2 wait instance-stopped --instance-ids $INSTANCE_ID
@@ -174,7 +174,7 @@ adb devices
 ssh -o 'ConnectionAttempts 10' -i <your_pem_file_path> $USER@ec2-$EC2_IP.$REGION.compute.amazonaws.com "/home/$USER/.local/bin/projector run AndroidStudio" &
 sleep 5
 echo "Projector started, opening browser..."
-open -W -a "Google Chrome" --args --app="https://$IP:8888/?host=$IP&port=$PORT"
+open -W -na "Google Chrome" --args --new-window --app="https://$IP:8888/?host=$IP&port=$PORT"
 aws ec2 stop-instances --instance-ids $INSTANCE_ID
 aws ec2 wait instance-stopped --instance-ids $INSTANCE_ID
 echo "Done"
